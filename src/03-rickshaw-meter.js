@@ -51,21 +51,70 @@
  *   findCheapestAndCostliest(150, 80, 200) // => { cheapest: 80, costliest: 200 }
  */
 export function parseFare(fareString) {
-  // Your code here
+  if (
+    typeof fareString != "string" ||
+    fareString == "" ||
+    !Number.isFinite(Number(fareString))
+  ) {
+    return -1;
+  } else {
+    return parseFloat(fareString);
+  }
 }
 
 export function roundFare(amount, decimalPlaces) {
-  // Your code here
+  if (
+    typeof amount != "number" ||
+    decimalPlaces < 0 ||
+    !Number.isInteger(decimalPlaces)
+  ) {
+    return "";
+  } else {
+    return amount.toFixed(decimalPlaces);
+  }
 }
 
 export function calculateSurge(baseFare, surgeMultiplier) {
-  // Your code here
+  if (
+    baseFare < 0 ||
+    surgeMultiplier < 0 ||
+    typeof baseFare != "number" ||
+    typeof surgeMultiplier != "number"
+  ) {
+    return 0;
+  } else {
+    return Math.ceil(baseFare * surgeMultiplier);
+  }
 }
 
+//Number() converts values to numbers, while Number.isFinite() strictly checks whether a value is a real finite number without type coercion.
 export function findCheapestAndCostliest(...fares) {
-  // Your code here
+  if (fares.length === 0) {
+    return null;
+  } else {
+    let numberArray = fares.filter(
+      (element) => typeof element === "number" && Number.isFinite(element),
+    );
+    if (numberArray.length=== 0) {
+      return null;
+    } else {
+      let chepest = Math.min(...numberArray);
+      console.log(chepest);
+      let costliest = Math.max(...numberArray);
+      console.log(costliest);
+
+      return {
+        cheapest: chepest,
+        costliest: costliest,
+      };
+    }
+  }
 }
 
 export function getDistanceDifference(from, to) {
-  // Your code here
+  if (isNaN(parseInt(from)) || isNaN(parseInt(to))) {
+    return -1;
+  } else {
+    return Math.abs(parseInt(from) - parseInt(to));
+  }
 }
